@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true"></div>
+    <div>
+      <h1>Token Launch Radar</h1>
+      <p class="tagline">Pre-token protocols ranked by implied launch value — and how to farm each one.</p>
+    </div>
+  </div>
+  <div class="stats" id="stats"></div>
+</header>
+
+<section class="model" id="model">
+  <h2>How the radar scores</h2>
+  <p class="model-formula">implied value = TVL × category multiple × growth × maturity × breadth × launch realism</p>
+  <ul class="model-notes" id="model-notes"></ul>
+  <p class="model-fine">The category multiple is the median market-cap / TVL of this snapshot's own tokenised
+  protocols in the same category, so the market prices the unit of TVL, not a hand-kept list. Protocols whose
+  token already trades are never ranked; they sit in the comparables strip as the model's calibration set.
+  A protocol here <em>records no token</em> in the snapshot — that is all the radar claims.</p>
+</section>
+
+<section class="controls" aria-label="Board controls">
+  <label class="ctl ctl-search">Search
+    <input type="search" id="q" placeholder="Protocol or category…" autocomplete="off">
+  </label>
+  <label class="ctl">Category
+    <select id="cat"></select>
+  </label>
+  <label class="ctl">Chain
+    <select id="chain"></select>
+  </label>
+  <label class="ctl">Sort by
+    <select id="sort">
+      <option value="value">Implied value</option>
+      <option value="tvl">TVL</option>
+      <option value="growth">7-day growth</option>
+      <option value="age">Track record (days)</option>
+    </select>
+  </label>
+  <label class="ctl ctl-check">
+    <input type="checkbox" id="wl"> Watchlist only
+  </label>
+  <span class="count" id="count"></span>
+</section>
+
+<main class="layout">
+  <div class="board-wrap">
+    <table class="board" id="board">
+      <thead>
+        <tr>
+          <th class="num">#</th><th>Protocol</th><th>Category</th><th>Chains</th>
+          <th class="num">TVL</th><th class="num">7d</th><th class="num">Age</th>
+          <th class="num">Implied value</th><th class="bar-cell">Share of top</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="empty" id="empty" hidden>No protocol matches those filters. Loosen one and the radar sweeps again.</p>
+  </div>
+  <aside class="detail" id="detail" aria-label="Protocol detail"></aside>
+</main>
+
+<section class="live" id="live">
+  <h2>Already trading — the calibration set</h2>
+  <p class="live-sub">These protocols record a token in the snapshot, so the radar never ranks them. Their
+  market-cap / TVL ratios are what price the pre-token board above.</p>
+  <div class="live-grid" id="live-grid"></div>
+</section>
+
+<footer class="foot">
+  <span id="foot-note"></span>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
